@@ -48,7 +48,17 @@ posts = [
 
 
 def index(request):
-    return HttpResponse('Главная страница')
-# def index(request):
-    # template = ''
+    template = 'blog/index.html'
+    return render(request, template)
+
+
+def post_detail(request, id):
+    template = 'posts/<int:id>'
     # return render(request, template)
+    return HttpResponse(f'post_detail {id}')
+
+
+def category_posts(request, category_slug):
+    template = 'category/<slug:category_slug>'
+    # return render(request, template)
+    return HttpResponse(f'category_posts {category_slug}')
