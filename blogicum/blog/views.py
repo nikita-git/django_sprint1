@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -53,12 +53,12 @@ def index(request):
 
 
 def post_detail(request, id):
-    template = 'posts/<int:id>'
-    # return render(request, template)
-    return HttpResponse(f'post_detail {id}')
+    template = 'blog/detail.html'
+    context = {'posts': posts[id]}
+    return render(request, template, context)
 
 
 def category_posts(request, category_slug):
-    template = 'category/<slug:category_slug>'
-    # return render(request, template)
-    return HttpResponse(f'category_posts {category_slug}')
+    template = 'blog/category.html'
+    context = {'slug': category_slug}
+    return render(request, template, context)
