@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="ru"> 
   <head>    
@@ -20,7 +21,7 @@
           </a>        
           <ul class="nav  nav-pills">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{% url 'blog:index' %}">
                 Лента записей
               </a>
             </li>
