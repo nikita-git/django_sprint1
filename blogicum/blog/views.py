@@ -1,9 +1,11 @@
 from django.shortcuts import render
 
+from typing import Any
 
-# Create your views here.
+from django.http import HttpResponse
 
-posts = [
+
+posts: list[dict[str, Any]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -47,19 +49,16 @@ posts = [
 ]
 
 
-def index(request):
-    template = 'blog/index.html'
+def index(request: Any) -> HttpResponse:
     context = {'posts': reversed(posts)}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
-    template = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template, context)
+def post_detail(request: Any, post_id: int) -> HttpResponse:
+    context = {'post': posts[post_id]}
+    return render(request, 'blog/detail.html', context)
 
 
-def category_posts(request, category_slug):
-    template = 'blog/category.html'
+def category_posts(request: Any, category_slug: Any) -> HttpResponse:
     context = {'slug': category_slug}
-    return render(request, template, context)
+    return render(request, 'blog/category.html', context)

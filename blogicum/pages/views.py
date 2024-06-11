@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+from typing import Any
+
+from django.http import HttpResponse
 
 
-def about(request):
-    template = 'pages/about.html'
-    return render(request, template)
+def about(request: Any) -> HttpResponse:
+    return render(request, 'pages/about.html')
 
 
-def rules(request):
-    template = 'pages/rules.html'
-    return render(request, template)
+def rules(request: Any) -> HttpResponse:
+    return render(request, 'pages/rules.html')
