@@ -2,13 +2,17 @@
 <!DOCTYPE html> 
 <html lang="ru"> 
   <head>
-    {% include "includes/css.html" %}
-    {% block title %} {% endblock %}
+    {% include "includes/meta.html" %}
+    <title>
+      {% block title %} {% endblock %}
+    </title>
   </head>
   <body>
     {% include "includes/header.html" %}
     <main>
+      <div class="container py-5">
         {% block content %} {% endblock %}
+      </div>
     </main>
     {% include "includes/footer.html" %}
   </body>
