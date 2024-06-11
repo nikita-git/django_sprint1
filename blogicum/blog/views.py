@@ -2,8 +2,7 @@ from django.shortcuts import render
 
 from typing import Any
 
-from django.http import HttpResponse
-
+from django.http import HttpResponse, Http404
 
 posts: list[dict[str, Any]] = [
     {
@@ -49,13 +48,21 @@ posts: list[dict[str, Any]] = [
 ]
 
 
+def get_post(post_id: int) -> list[dict[str, Any]]:
+    post = [post for post in posts if post['id'] == post_id]
+    return post
+
+
 def index(request: Any) -> HttpResponse:
     context = {'posts': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request: Any, post_id: int) -> HttpResponse:
-    context = {'post': posts[post_id]}
+    temp = get_post(post_id)
+    if not temp:
+        raise Http404('Не верный id поста.')
+    context = {'post': temp[0]}
     return render(request, 'blog/detail.html', context)
 
 
