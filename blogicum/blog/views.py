@@ -1,11 +1,11 @@
-from typing import Any
+from typing import Any, Union
 
 from django.shortcuts import render
 
 from django.http import HttpResponse, Http404
 
 
-posts: list[dict[str, Any]] = [
+posts: list[dict[str, Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -49,9 +49,7 @@ posts: list[dict[str, Any]] = [
 ]
 
 
-def get_post(post_id: int) -> list[dict[str, Any]]:
-    post = [post for post in posts if post['id'] == post_id]
-    return post
+POSTS = {post['id']: post for post in posts}
 
 
 def index(request: Any) -> HttpResponse:
@@ -60,10 +58,10 @@ def index(request: Any) -> HttpResponse:
 
 
 def post_detail(request: Any, post_id: int) -> HttpResponse:
-    temp = get_post(post_id)
+    temp = POSTS[post_id]
     if not temp:
         raise Http404('Не верный id поста.')
-    context = {'post': temp[0]}
+    context = {'post': temp}
     return render(request, 'blog/detail.html', context)
 
 
