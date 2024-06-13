@@ -1,8 +1,9 @@
-from django.shortcuts import render
-
 from typing import Any
 
+from django.shortcuts import render
+
 from django.http import HttpResponse, Http404
+
 
 posts: list[dict[str, Any]] = [
     {
